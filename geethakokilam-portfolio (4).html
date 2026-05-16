@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Geethakokilam R — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --red: #E8002D;
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #161616;
+    --border: #2a2a2a;
+    --white: #f5f5f5;
+    --grey: #888;
+    --yellow: #FFD700;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--black); color: var(--white); font-family: 'Barlow', sans-serif; font-weight: 300; overflow-x: hidden; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--red); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem; height: 60px;
+    background: rgba(10,10,10,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 3px; color: var(--white); text-decoration: none; }
+  .nav-logo span { color: var(--red); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--grey); font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--red); }
+
+  /* HERO */
+  #hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 2.5rem 2.5rem; position: relative; overflow: hidden; }
+  .hero-track-lines { position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(90deg, transparent, transparent 80px, rgba(232,0,45,0.04) 80px, rgba(232,0,45,0.04) 81px); }
+  .hero-track-lines::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, transparent, transparent 80px, rgba(255,255,255,0.02) 80px, rgba(255,255,255,0.02) 81px); }
+  .hero-number { position: absolute; right: -0.05em; top: 50%; transform: translateY(-50%); font-family: 'Bebas Neue', sans-serif; font-size: clamp(180px, 28vw, 340px); color: rgba(232,0,45,0.06); line-height: 1; pointer-events: none; user-select: none; letter-spacing: -5px; }
+  .hero-content { position: relative; z-index: 2; max-width: 820px; }
+  .hero-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 10px; }
+  .hero-label::before { content: ''; display: block; width: 30px; height: 2px; background: var(--red); }
+  h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 9vw, 7.5rem); line-height: 0.92; letter-spacing: 2px; margin-bottom: 1.5rem; }
+  h1 .line-red { color: var(--red); }
+  .hero-tagline { font-size: clamp(0.9rem, 1.5vw, 1.1rem); color: var(--grey); max-width: 560px; line-height: 1.7; margin-bottom: 2.5rem; font-weight: 400; }
+  .hero-tagline strong { color: var(--white); font-weight: 600; }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 0.75rem 1.8rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
+  .btn-primary { background: var(--red); color: #fff; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%); }
+  .btn-primary:hover { background: #ff1a3e; }
+  .btn-secondary { background: transparent; color: var(--white); border: 1px solid var(--border); clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%); }
+  .btn-secondary:hover { border-color: var(--red); color: var(--red); }
+  .hero-stats { margin-top: 4rem; display: flex; gap: 3rem; flex-wrap: wrap; }
+  .stat { border-left: 2px solid var(--red); padding-left: 1rem; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--white); line-height: 1; }
+  .stat-label { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--grey); margin-top: 2px; }
+
+  /* SECTIONS */
+  section { padding: 6rem 2.5rem; }
+  .section-header { margin-bottom: 3.5rem; }
+  .section-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem; }
+  h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 2px; line-height: 1; }
+  .section-line { width: 60px; height: 3px; background: var(--red); margin-top: 1rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ABOUT */
+  #about { background: var(--dark); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-bio { font-size: 1.05rem; line-height: 1.85; color: #ccc; font-weight: 300; }
+  .about-bio p + p { margin-top: 1.2rem; }
+  .about-bio strong { color: var(--white); font-weight: 600; }
+  .edu-card { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--red); padding: 1.4rem 1.6rem; margin-bottom: 1rem; }
+  .edu-school { font-weight: 700; font-size: 1rem; color: var(--white); }
+  .edu-deg { font-size: 0.85rem; color: var(--grey); margin-top: 4px; }
+  .edu-year { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 2px; color: var(--red); margin-top: 6px; text-transform: uppercase; }
+  .edu-gpa { display: inline-block; background: rgba(232,0,45,0.12); color: var(--red); font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; padding: 2px 8px; margin-top: 6px; }
+
+  /* SKILLS */
+  #skills { background: var(--black); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-card { background: var(--card); border: 1px solid var(--border); padding: 1.8rem; position: relative; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
+  .skill-card:hover { border-color: var(--red); transform: translateY(-3px); }
+  .skill-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--red); transition: height 0.3s; }
+  .skill-card:hover::before { height: 100%; }
+  .skill-category { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: var(--red); margin-bottom: 1rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tag { background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--grey); font-size: 0.75rem; font-weight: 600; letter-spacing: 1px; padding: 4px 12px; text-transform: uppercase; transition: all 0.2s; }
+  .skill-card:hover .tag { border-color: rgba(232,0,45,0.3); color: var(--white); }
+
+  /* CERTS */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+  .cert-card { background: var(--card); border: 1px solid var(--border); padding: 1.2rem 1.5rem; display: flex; align-items: center; gap: 1rem; text-decoration: none; transition: all 0.2s; cursor: pointer; }
+  .cert-card:hover { border-color: var(--red); background: rgba(232,0,45,0.06); }
+  .cert-icon { width: 42px; height: 42px; flex-shrink: 0; background: rgba(232,0,45,0.12); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+  .cert-name { font-size: 0.88rem; font-weight: 600; color: var(--white); line-height: 1.4; }
+  .cert-issuer { font-size: 0.74rem; color: var(--grey); margin-top: 3px; }
+  .cert-arrow { margin-left: auto; font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; color: var(--red); border: 1px solid var(--red); padding: 2px 7px; flex-shrink: 0; opacity: 0; transition: opacity 0.2s; }
+  .cert-card:hover .cert-arrow { opacity: 1; }
+
+  /* PROJECTS */
+  #projects { background: var(--dark); }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; position: relative; overflow: hidden; transition: all 0.25s; }
+  .project-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--red), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .project-card:hover { border-color: rgba(232,0,45,0.4); transform: translateY(-4px); }
+  .project-card:hover::after { transform: scaleX(1); }
+  .project-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: rgba(232,0,45,0.08); line-height: 1; position: absolute; top: 1rem; right: 1.5rem; }
+  .project-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
+  .project-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 2px 8px; background: rgba(232,0,45,0.12); color: var(--red); border: 1px solid rgba(232,0,45,0.2); }
+  .project-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 1px; margin-bottom: 0.8rem; color: var(--white); }
+  .project-desc { font-size: 0.88rem; color: var(--grey); line-height: 1.7; margin-bottom: 1.5rem; }
+  .project-desc li { margin-left: 1rem; margin-bottom: 4px; }
+  .project-links { display: flex; gap: 1rem; }
+  .project-link { font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); text-decoration: none; display: flex; align-items: center; gap: 5px; transition: color 0.2s; }
+  .project-link:hover { color: var(--red); }
+  .project-badge { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); color: var(--yellow); font-size: 0.72rem; font-weight: 700; letter-spacing: 1px; padding: 3px 10px; margin-bottom: 0.8rem; text-transform: uppercase; }
+
+  /* HACKATHONS */
+  #hackathons { background: var(--black); }
+  .hackathon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+  .hack-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; position: relative; overflow: hidden; transition: all 0.2s; }
+  .hack-card:hover { border-color: var(--red); }
+  .hack-pos { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: var(--red); line-height: 1; opacity: 0.15; position: absolute; top: 0.5rem; right: 1rem; }
+  .hack-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; color: var(--white); margin-bottom: 0.4rem; }
+  .hack-org { font-size: 0.8rem; color: var(--grey); margin-bottom: 1rem; }
+  .hack-result { display: inline-flex; align-items: center; gap: 6px; background: rgba(232,0,45,0.1); border: 1px solid rgba(232,0,45,0.25); color: var(--red); font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; padding: 4px 12px; text-transform: uppercase; margin-bottom: 1rem; }
+  .hack-desc { font-size: 0.85rem; color: #888; line-height: 1.65; }
+  .hack-cert-btn { margin-top: 1.2rem; display: inline-flex; align-items: center; gap: 6px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); border: 1px solid var(--border); padding: 6px 14px; transition: all 0.2s; cursor: pointer; background: none; }
+  .hack-cert-btn:hover { color: var(--white); border-color: var(--red); }
+
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.88); align-items: center; justify-content: center; }
+  .modal-overlay.open { display: flex; }
+  .modal-box { background: var(--card); border: 1px solid var(--border); max-width: 780px; width: 92%; max-height: 88vh; display: flex; flex-direction: column; overflow: hidden; }
+  .modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 2px; color: var(--white); }
+  .modal-close { background: none; border: none; color: var(--grey); font-size: 1.8rem; cursor: pointer; line-height: 1; padding: 0 4px; transition: color 0.2s; }
+  .modal-close:hover { color: var(--red); }
+  .modal-body { flex: 1; overflow-y: auto; padding: 1.5rem; }
+
+  /* ACTIVITIES */
+  #activities { background: var(--dark); }
+  .activity-list { display: flex; flex-direction: column; }
+  .activity-item { display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.4rem 0; border-bottom: 1px solid var(--border); }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); flex-shrink: 0; margin-top: 5px; }
+  .activity-text { font-size: 0.95rem; color: #bbb; line-height: 1.6; }
+  .activity-text strong { color: var(--white); font-weight: 600; }
+
+  /* BLOG */
+  #blog { background: var(--black); }
+  .blog-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; }
+  .blog-card { background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: all 0.25s; cursor: pointer; }
+  .blog-card:hover { border-color: var(--red); transform: translateY(-2px); }
+  .blog-card-featured { grid-row: span 2; }
+  .blog-img-placeholder { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, #1a0005 0%, #2d0000 50%, #0a0a0a 100%); display: flex; align-items: center; justify-content: center; font-size: 4rem; position: relative; overflow: hidden; }
+  .blog-img-placeholder::before { content: 'F1'; position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: 6rem; color: rgba(232,0,45,0.07); letter-spacing: 4px; }
+  .blog-body { padding: 1.5rem; }
+  .blog-meta { display: flex; gap: 1rem; align-items: center; margin-bottom: 0.8rem; }
+  .blog-cat { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); background: rgba(232,0,45,0.1); border: 1px solid rgba(232,0,45,0.2); padding: 2px 8px; }
+  .blog-date { font-size: 0.72rem; color: var(--grey); }
+  .blog-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; color: var(--white); margin-bottom: 0.7rem; line-height: 1.1; }
+  .blog-excerpt { font-size: 0.83rem; color: var(--grey); line-height: 1.7; }
+  .blog-read-more { display: inline-flex; align-items: center; gap: 6px; margin-top: 1rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--red); }
+  .blog-modal-content { line-height: 1.8; color: #ccc; font-size: 0.92rem; }
+  .blog-modal-content h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; color: var(--white); margin: 1.5rem 0 0.5rem; }
+  .blog-modal-content p { margin-bottom: 1rem; }
+  .blog-modal-content strong { color: var(--white); }
+  .blog-modal-content .highlight { background: rgba(232,0,45,0.08); border-left: 3px solid var(--red); padding: 0.8rem 1rem; margin: 1rem 0; font-style: italic; }
+
+  /* CONTACT */
+  #contact { background: var(--dark); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1.2rem 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: all 0.2s; }
+  .contact-item:hover .contact-label { color: var(--red); }
+  .contact-icon { width: 44px; height: 44px; flex-shrink: 0; background: rgba(232,0,45,0.08); border: 1px solid rgba(232,0,45,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+  .contact-label { font-weight: 600; color: var(--white); font-size: 0.9rem; display: block; line-height: 1.3; transition: color 0.2s; }
+  .contact-sub { font-size: 0.78rem; color: var(--grey); }
+  .contact-right { display: flex; flex-direction: column; justify-content: center; }
+  .contact-headline { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3rem); letter-spacing: 2px; color: var(--white); line-height: 1.1; margin-bottom: 1.5rem; }
+  .contact-headline span { color: var(--red); }
+  .contact-blurb { font-size: 0.9rem; color: var(--grey); line-height: 1.7; margin-bottom: 2rem; }
+  .resume-btn { display: inline-flex; align-items: center; gap: 10px; padding: 0.9rem 2rem; background: var(--red); color: #fff; font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 100%, 10px 100%); transition: background 0.2s; cursor: pointer; border: none; text-decoration: none; }
+  .resume-btn:hover { background: #ff1a3e; }
+
+  /* FORM */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; margin-bottom: 0.9rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--grey); }
+  .req { color: var(--red); }
+  .form-input { background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--white); font-family: 'Barlow', sans-serif; font-size: 0.88rem; padding: 0.65rem 0.9rem; outline: none; transition: border-color 0.2s, background 0.2s; width: 100%; border-radius: 0; -webkit-appearance: none; }
+  .form-input::placeholder { color: #444; }
+  .form-input:focus { border-color: var(--red); background: rgba(232,0,45,0.04); }
+  .form-select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 2rem; }
+  .form-select option { background: #1a1a1a; color: var(--white); }
+  .form-textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+  .form-error { font-size: 0.78rem; color: var(--red); background: rgba(232,0,45,0.08); border: 1px solid rgba(232,0,45,0.2); padding: 8px 12px; margin-top: 0.5rem; }
+
+  /* FOOTER */
+  footer { background: var(--black); border-top: 1px solid var(--border); padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 3px; color: var(--grey); }
+  .footer-logo span { color: var(--red); }
+  .footer-copy { font-size: 0.75rem; color: #555; }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.2rem; }
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.7rem; letter-spacing: 1px; }
+    section { padding: 4rem 1.2rem; }
+    .about-grid, .contact-grid, .blog-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .blog-card-featured { grid-row: span 1; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero">GK<span>.</span>R</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#hackathons">Hackathons</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-track-lines"></div>
+  <div class="hero-number">13</div>
+  <div class="hero-content container">
+    <div class="hero-label">Fresher · Data Analyst · Developer</div>
+    <h1>GEETHA<br/><span class="line-red">KOKILAM</span><br/>R</h1>
+    <p class="hero-tagline">
+      <strong>Data Analyst · SQL Specialist · Python Enthusiast · AIML for Real-World.</strong><br/>
+      Pre-final year IT student at SMVEC, Puducherry — turning raw data into decisions, one query at a time. Also: lifelong F1 obsessive.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary" id="btn-view-projects">▶ View Projects</a>
+      <a href="#contact" class="btn btn-secondary" id="btn-get-in-touch">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">8.50</div><div class="stat-label">GPA (B.Tech IT)</div></div>
+      <div class="stat"><div class="stat-num">3rd</div><div class="stat-label">Hackcelerate '26</div></div>
+      <div class="stat"><div class="stat-num">4K+</div><div class="stat-label">Hackathon participants beaten</div></div>
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Certifications</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">01 — Who I Am</div>
+      <h2>ABOUT ME</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-grid">
+      <div>
+        <div class="about-bio">
+          <p>I'm <strong>Geethakokilam R</strong>, a pre-final year <strong>Information Technology</strong> student (Honours in AI &amp; ML) at Sri Manakula Vinayagar Engineering College, Puducherry — currently targeting roles in <strong>Data Analytics</strong> and <strong>Software Development</strong>.</p>
+          <p>I specialize in transforming messy, raw data into <strong>meaningful insights</strong> through efficient querying, cleaning, and visualization. I love the process of finding the story hidden inside numbers — whether that's in a business dataset or in <strong>Formula 1 lap telemetry</strong>.</p>
+          <p>Beyond the screen, I'm an <strong>F1 fanatic</strong> who tracks every race, every strategy call, and every millisecond on the grid. I believe the analytical mindset that makes a great data analyst is the same one that makes a great race strategist.</p>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:var(--grey);margin-bottom:1.2rem;">EDUCATION</h3>
+        <div class="edu-card">
+          <div class="edu-school">Sri Manakula Vinayagar Engineering College (SMVEC)</div>
+          <div class="edu-deg">B.Tech — Information Technology<br/>Honours: Artificial Intelligence &amp; Machine Learning</div>
+          <div class="edu-year">2023 — 2027 · Puducherry, India</div>
+          <div class="edu-gpa">GPA: 8.50</div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-school">ST. Patrick Matric Higher Secondary School</div>
+          <div class="edu-deg">Higher Secondary School</div>
+          <div class="edu-year">2022 — 2023 · Puducherry, India</div>
+          <div class="edu-gpa">Percentage: 86.5%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">02 — What I Know</div>
+      <h2>SKILLS &amp; TOOLS</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card"><div class="skill-category">Programming &amp; Databases</div><div class="skill-tags"><span class="tag">Python</span><span class="tag">SQL</span></div></div>
+      <div class="skill-card"><div class="skill-category">Machine Learning</div><div class="skill-tags"><span class="tag">Data Preprocessing</span><span class="tag">Supervised Learning</span><span class="tag">Unsupervised Learning</span><span class="tag">Model Evaluation</span></div></div>
+      <div class="skill-card"><div class="skill-category">Frontend &amp; Tools</div><div class="skill-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Jupyter Notebook</span><span class="tag">Google Colab</span><span class="tag">Microsoft 365</span><span class="tag">Power BI</span></div></div>
+      <div class="skill-card"><div class="skill-category">Software Engineering</div><div class="skill-tags"><span class="tag">SDLC</span><span class="tag">Agile</span></div></div>
+      <div class="skill-card"><div class="skill-category">Professional Skills</div><div class="skill-tags"><span class="tag">Team Leadership</span><span class="tag">Communication</span><span class="tag">Time Management</span><span class="tag">Openness to Feedback</span><span class="tag">Learning Mindset</span></div></div>
+    </div>
+    <div style="margin-top:4rem;">
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:var(--white);margin-bottom:0.4rem;">CERTIFICATIONS</h3>
+      <p style="font-size:0.8rem;color:var(--grey);margin-bottom:0;letter-spacing:1px;">Click any certificate to open it</p>
+      <div class="cert-grid">
+        <a class="cert-card" href="certificates/Delloite_cert.pdf" target="_blank"><div class="cert-icon">📊</div><div><div class="cert-name">Data Analyst Virtual Job Simulation</div><div class="cert-issuer">Deloitte · Forage</div></div><span class="cert-arrow">↗</span></a>
+        <a class="cert-card" href="certificates/combined_certificates.pdf" target="_blank"><div class="cert-icon">☁️</div><div><div class="cert-name">AWS Cloud Foundations + GenAI Foundations</div><div class="cert-issuer">Amazon Web Services</div></div><span class="cert-arrow">↗</span></a>
+        <a class="cert-card" href="certificates/Junior_Cybersecurity_Analyst.pdf" target="_blank"><div class="cert-icon">🔐</div><div><div class="cert-name">Cybersecurity Essentials</div><div class="cert-issuer">Cisco Networking Academy</div></div><span class="cert-arrow">↗</span></a>
+        <a class="cert-card" href="certificates/SoftwareTesting_nptel.pdf" target="_blank"><div class="cert-icon">🎓</div><div><div class="cert-name">Software Testing (Foundational)</div><div class="cert-issuer">NPTEL</div></div><span class="cert-arrow">↗</span></a>
+        <a class="cert-card" href="certificates/wadhwani_combined.pdf" target="_blank"><div class="cert-icon">🗣️</div><div><div class="cert-name">Effective Speaking &amp; Professionalism</div><div class="cert-issuer">Wadhwani Foundation</div></div><span class="cert-arrow">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">03 — What I've Built</div>
+      <h2>PROJECTS</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-num">01</div>
+        <div class="project-badge">🏆 3rd Place — Hackcelerate '26</div>
+        <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">ML</span><span class="project-tag">Hackathon</span></div>
+        <div class="project-title">UNasked — Stress Monitor</div>
+        <div class="project-desc"><ul><li>Led a team of 4 to build a Python-based stress detection tool</li><li>Detects stress by analyzing typing speed, backspaces, and mouse movements in real-time</li><li>Secured 3rd place among 30 finalist teams out of 4,000+ participants</li></ul></div>
+        <div class="project-links"><a class="project-link" href="https://github.com/janani2045/unasked-final" target="_blank">⬡ GitHub ↗</a></div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">02</div>
+        <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">ML</span><span class="project-tag">NLP</span></div>
+        <div class="project-title">Spam Detection System</div>
+        <div class="project-desc"><ul><li>Team lead for a spam detection solution using supervised ML</li><li>Contributed to data preparation, analysis, and model logic to classify spam content</li><li>Managed task allocation, timelines, and team collaboration</li></ul></div>
+        <div class="project-links"><a class="project-link" href="https://github.com/Geetha1310/context-aware-spam-detector" target="_blank">⬡ GitHub ↗</a></div>
+      </div>
+      <div class="project-card">
+        <div class="project-num">03</div>
+        <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Data Analysis</span><span class="project-tag">F1</span></div>
+        <div class="project-title">F1 Strategy Optimizer</div>
+        <div class="project-desc"><ul><li>Passion project analyzing F1 race data and lap telemetry</li><li>Explores pit-stop windows, tyre degradation models, and race strategy simulation</li><li>Built with Python, Pandas, and Matplotlib</li></ul></div>
+        <div class="project-links"><a class="project-link" href="https://github.com/Geetha1310/f1-race-strategy-optimizer" target="_blank">⬡ GitHub ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hackathons">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">04 — Battle Scars</div>
+      <h2>HACKATHONS</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="hackathon-grid">
+      <div class="hack-card">
+        <div class="hack-pos">3</div>
+        <div class="hack-title">Hackcelerate '26</div>
+        <div class="hack-org">SRM Ramapuram · 2026</div>
+        <div class="hack-result">🥉 3rd Place</div>
+        <div class="hack-desc">Built "UNasked" — a real-time stress detection tool using Python that analyzed keyboard and mouse behavior. Competed among 30 finalist teams selected from 4,000+ participants nationwide.</div>
+        <button class="hack-cert-btn" id="btn-open-hack">📄 View Certificate</button>
+      </div>
+      <div class="hack-card">
+        <div class="hack-pos">✓</div>
+        <div class="hack-title">National AI/ML Hackathon — YUVAAN</div>
+        <div class="hack-org">IIT Hyderabad · Vivriti Capital · Unstop</div>
+        <div class="hack-result">✅ Participated</div>
+        <div class="hack-desc">Participated as Team geethakokilam13 in the National AI/ML Hackathon by Vivriti Capital, organised by IIT Hyderabad. One of the most competitive national-level AI challenges.</div>
+        <button class="hack-cert-btn" id="btn-open-iit">📄 View Certificate</button>
+      </div>
+      <div class="hack-card">
+        <div class="hack-pos">✓</div>
+        <div class="hack-title">Eureka — E Cell</div>
+        <div class="hack-org">2025</div>
+        <div class="hack-result">✅ Participated</div>
+        <div class="hack-desc">Participated in Eureka by the Entrepreneurship Cell — an ideation and innovation event that challenged teams to pitch tech-driven solutions to real-world problems.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="activities">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">05 — Beyond the Classroom</div>
+      <h2>ACTIVITIES &amp; ACHIEVEMENTS</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="activity-list">
+      <div class="activity-item"><div class="activity-dot"></div><div class="activity-text">Attended a <strong>Machine Learning Workshop</strong> conducted by top engineers at <strong>IITM Research Park</strong>, Chennai — hands-on exposure to real-world ML pipelines.</div></div>
+      <div class="activity-item"><div class="activity-dot"></div><div class="activity-text">Attended an <strong>IEI Technical Workshop and Professional Development Program</strong> — strengthened engineering foundations and workplace readiness.</div></div>
+      <div class="activity-item"><div class="activity-dot"></div><div class="activity-text">Participated in <strong>Eureka – E Cell (2025)</strong> — ideation event focused on entrepreneurial thinking and tech innovation.</div></div>
+      <div class="activity-item"><div class="activity-dot"></div><div class="activity-text">🥉 <strong>Third Place – Hackcelerate '26</strong> (SRM Ramapuram) — out of 4,000+ participants, 30 teams made the finals.</div></div>
+      <div class="activity-item"><div class="activity-dot"></div><div class="activity-text">Attended an <strong>AI Automation Workshop</strong> as part of <strong>Puduvai Youthfest '26</strong> — explored AI tools and automation in industry contexts.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="blog">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">06 — Paddock Notes</div>
+      <h2>F1 BLOG</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card blog-card-featured" id="blog-card-1">
+        <div class="blog-img-placeholder">🏎️</div>
+        <div class="blog-body">
+          <div class="blog-meta"><span class="blog-cat">2025 Season Review</span><span class="blog-date">Dec 2025</span></div>
+          <div class="blog-title">F1 2025: THE SEASON THAT REWROTE THE SCRIPT</div>
+          <div class="blog-excerpt">From McLaren's dominance to Ferrari's resurgence and a rookie who turned heads — 2025 was the season Formula 1 finally broke free of its one-team era.</div>
+          <span class="blog-read-more">Read Full Post →</span>
+        </div>
+      </div>
+      <div class="blog-card" id="blog-card-2">
+        <div class="blog-body" style="padding-top:1.8rem;">
+          <div class="blog-meta"><span class="blog-cat">Race Report</span><span class="blog-date">Mar 2026</span></div>
+          <div class="blog-title">KIMI'S FIRST WIN — CHINESE GP 2026</div>
+          <div class="blog-excerpt">At just 20 years old, Kimi Antonelli took his maiden F1 victory on the streets of Shanghai. My take on how it happened.</div>
+          <span class="blog-read-more">Read Full Post →</span>
+        </div>
+      </div>
+      <div class="blog-card" id="blog-card-3">
+        <div class="blog-body" style="padding-top:1.8rem;">
+          <div class="blog-meta"><span class="blog-cat">Analysis</span><span class="blog-date">Mar 2026</span></div>
+          <div class="blog-title">2026 REGS — A DATA ANALYST'S TAKE</div>
+          <div class="blog-excerpt">New engines, new aero, new power units. I break down what the 2026 regulation changes mean — as a data analyst who loves racing.</div>
+          <span class="blog-read-more">Read Full Post →</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">07 — Let's Talk</div>
+      <h2>CONTACT</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <a class="contact-item" href="mailto:geethakokilam13@gmail.com"><div class="contact-icon">✉️</div><div><span class="contact-label">Email</span><span class="contact-sub">geethakokilam13@gmail.com</span></div></a>
+        <a class="contact-item" href="tel:+919600717517"><div class="contact-icon">📱</div><div><span class="contact-label">Mobile</span><span class="contact-sub">+91 9600717517</span></div></a>
+        <a class="contact-item" href="https://www.linkedin.com/in/geethakokilam-rama-sabari-raja-brabue-554b8a271" target="_blank"><div class="contact-icon">💼</div><div><span class="contact-label">LinkedIn</span><span class="contact-sub">geethakokilam-rama-sabari-raja-brabue</span></div></a>
+        <a class="contact-item" href="https://github.com/Geetha1310" target="_blank"><div class="contact-icon">⬡</div><div><span class="contact-label">GitHub</span><span class="contact-sub">github.com/Geetha1310</span></div></a>
+      </div>
+      <div class="contact-right">
+        <div class="contact-headline">SLIDE INTO<br/><span>MY PIT LANE</span></div>
+        <div class="contact-blurb">Actively seeking internships and entry-level roles in <strong style="color:var(--white)">Data Analytics</strong> &amp; <strong style="color:var(--white)">Software Development</strong>. Drop your details below — I'll get back to you faster than an F1 pit stop.</div>
+        <div id="contactFormWrap">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Full Name <span class="req">*</span></label><input class="form-input" id="cf_name" type="text" placeholder="e.g. Lewis Hamilton" autocomplete="off"/></div>
+            <div class="form-group"><label class="form-label">Email Address <span class="req">*</span></label><input class="form-input" id="cf_email" type="email" placeholder="you@example.com" autocomplete="off"/></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Profession / Role <span class="req">*</span></label>
+              <select class="form-input form-select" id="cf_profession">
+                <option value="" disabled selected>Select your role</option>
+                <option>Recruiter / HR</option><option>Software Engineer</option><option>Data Analyst / Scientist</option><option>Product Manager</option><option>Founder / Entrepreneur</option><option>Fellow Student</option><option>Other</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">LinkedIn Profile</label><input class="form-input" id="cf_linkedin" type="url" placeholder="linkedin.com/in/yourname"/></div>
+          </div>
+          <div class="form-group" style="margin-top:0.6rem;"><label class="form-label">Message <span class="req">*</span></label><textarea class="form-input form-textarea" id="cf_message" placeholder="Tell me what you're looking for, or just say hi 👋"></textarea></div>
+          <div id="cf_error" class="form-error" style="display:none;"></div>
+          <div style="display:flex;align-items:center;gap:1rem;margin-top:1.2rem;flex-wrap:wrap;">
+            <button type="button" class="resume-btn" id="cf_submit"><span id="cf_btn_text">🏁 Send Message</span></button>
+            <a class="resume-btn" href="certificates/GEETHAKOKILAM_Resume.pdf" target="_blank" style="background:transparent;border:1px solid var(--border);color:var(--grey);clip-path:none;">📄 View Resume</a>
+          </div>
+          <p style="font-size:0.72rem;color:#444;margin-top:1rem;">🔒 Your info is collected via Google Sheets only — no spam, ever.</p>
+        </div>
+        <div id="cf_success" style="display:none;text-align:center;padding:2.5rem 1rem;">
+          <div style="font-size:3rem;margin-bottom:1rem;">🏆</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--white);margin-bottom:0.5rem;">MESSAGE RECEIVED!</div>
+          <div style="font-size:0.88rem;color:var(--grey);line-height:1.7;">Thanks for reaching out. I'll get back to you soon — faster than a safety car restart.</div>
+          <button id="btn-reset-form" style="margin-top:1.5rem;background:none;border:1px solid var(--border);color:var(--grey);padding:8px 20px;font-size:0.78rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;">↩ Send Another</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">GK<span>.</span>R</div>
+  <div class="footer-copy">© 2026 Geethakokilam R · Built with passion &amp; Python · Driven by data &amp; F1</div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="hackModal">
+  <div class="modal-box">
+    <div class="modal-header"><div class="modal-title">HACKCELERATE '26 — CERTIFICATE</div><button class="modal-close" id="close-hackModal">×</button></div>
+    <div class="modal-body">
+      <iframe src="certificates/Hackcelerate_cert.pdf" style="width:100%;height:70vh;border:none;"></iframe>
+      <a href="certificates/Hackcelerate_cert.pdf" target="_blank" style="display:inline-block;margin-top:1rem;color:var(--red);font-size:0.8rem;text-decoration:none;">⬇ Download Certificate</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="iitModal">
+  <div class="modal-box">
+    <div class="modal-header"><div class="modal-title">NATIONAL AI/ML HACKATHON — IIT HYDERABAD</div><button class="modal-close" id="close-iitModal">×</button></div>
+    <div class="modal-body">
+      <iframe src="certificates/IITH_hackathon.pdf" style="width:100%;height:70vh;border:none;"></iframe>
+      <a href="certificates/IITH_hackathon.pdf" target="_blank" style="display:inline-block;margin-top:1rem;color:var(--red);font-size:0.8rem;text-decoration:none;">⬇ Download Certificate</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="blogModal">
+  <div class="modal-box" style="max-width:740px;">
+    <div class="modal-header"><div class="modal-title" id="blogModalTitle">BLOG</div><button class="modal-close" id="close-blogModal">×</button></div>
+    <div class="modal-body"><div class="blog-modal-content" id="blogModalContent"></div></div>
+  </div>
+</div>
+
+<script>
+(function() {
+
+  /* ── HELPERS ── */
+  function openModal(id) {
+    var m = document.getElementById(id);
+    if (m) m.classList.add('open');
+  }
+  function closeModal(id) {
+    var m = document.getElementById(id);
+    if (m) m.classList.remove('open');
+  }
+  function smoothTo(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 68, behavior: 'smooth' });
+  }
+
+  /* ── BLOG CONTENT ── */
+  var blogs = {
+    '1': {
+      title: 'F1 2025: THE SEASON THAT REWROTE THE SCRIPT',
+      meta: '2025 Season Review &nbsp;&middot;&nbsp; Dec 2025 &nbsp;&middot;&nbsp; 5 min read',
+      content: '<p>If you asked anyone at the start of 2025 who would dominate, most would have said Red Bull. They were wrong — and it was glorious.</p>' +
+        '<h3>The Pre-Season Narrative</h3>' +
+        '<p>Winter testing told a muddled story. McLaren looked quick but inconsistent. Ferrari were cautiously optimistic. Red Bull hid performance. And yet, by Bahrain, the picture had already shifted dramatically.</p>' +
+        '<h3>McLaren\'s Title Charge</h3>' +
+        '<p><strong>Lando Norris</strong> arrived in 2025 as a championship contender in every sense. With an MCL39 that could genuinely fight on any surface, Lando delivered race after race. The McLaren pit wall was calmer, the strategy sharper, and the car faster in dirty air than anything that had come before from Woking.</p>' +
+        '<p>Oscar Piastri was no longer just a promising rookie — he was a full weapon in McLaren\'s arsenal. The inter-team dynamic was tense, respectful, and genuinely exciting. They didn\'t destroy each other. They beat everyone else.</p>' +
+        '<div class="highlight">"The papaya army didn\'t just show up in 2025 — they showed up to win. Every single race weekend."</div>' +
+        '<h3>Ferrari\'s Rollercoaster</h3>' +
+        '<p>Ferrari had moments of pure brilliance — race wins, fastest laps, genuine podium battles. But strategy errors at critical rounds cost them dearly. Charles Leclerc continued to extract miracle laps from a car that wasn\'t always worthy of him.</p>' +
+        '<h3>Red Bull\'s Slip</h3>' +
+        '<p><strong>Max Verstappen</strong> is still the most complete driver on the grid. But the RB21 showed cracks that even Max could not paper over. Underperforming in high-speed corners became a trend. The aero philosophy that made them untouchable in 2022–24 finally met its match.</p>' +
+        '<h3>My Analyst Takeaway</h3>' +
+        '<p>As a data analyst, 2025 was the season that made me fall even deeper in love with this sport. Watching teams optimize for different circuit characteristics was like watching real-time multivariate regression in action. The variance in results was higher. The strategy battles were more complex. If you\'re into numbers, 2025 was the best F1 season in a decade.</p>'
+    },
+    '2': {
+      title: "KIMI'S FIRST WIN — CHINESE GP 2026",
+      meta: 'Race Report &nbsp;&middot;&nbsp; March 23, 2026 &nbsp;&middot;&nbsp; 4 min read',
+      content: '<p>I was watching at 7am, half-asleep with a coffee going cold beside me. By lap 48, I was standing in my room, shouting at my screen. <strong>Kimi Antonelli</strong> just won his first Formula 1 Grand Prix — and it was stunning.</p>' +
+        '<h3>Saturday: The Quiet Warning Sign</h3>' +
+        '<p>Qualifying at Shanghai is always a gamble. The track evolves rapidly in Q3. Antonelli posted P3 — not spectacular, but a clean lap from a 20-year-old who looked absolutely ice-cold under the lights. No errors. No drama. Just time on the board.</p>' +
+        '<h3>Race Day: The Strategy Call Nobody Expected</h3>' +
+        '<p>A Safety Car on lap 19 changed everything. Most teams pitted for mediums — the conservative call. Mercedes brought Kimi in for softs. High-risk, maximum reward.</p>' +
+        '<div class="highlight">"Sometimes the best strategy is not the safe one. It\'s the one nobody else is brave enough to take."</div>' +
+        '<p>Antonelli emerged P6 after the stops, on tyres a full compound fresher than anyone ahead. The grip differential was enormous. He was hunting.</p>' +
+        '<h3>The Overtakes</h3>' +
+        '<p>The move on Piastri into Turn 6 on lap 41 was clinical. Late on the brakes, perfect apex, clean exit. The pass on the leader at Turn 14 on lap 47 was even better — he braked so late it seemed physically impossible. He made it. Comfortably. The Mercedes garage erupted. Toto Wolff looked visibly emotional.</p>' +
+        '<h3>What It Means</h3>' +
+        '<p>Kimi is not just filling Lewis Hamilton\'s seat. He is making it his own. At 20, with one win and a growing points tally, he is already a title conversation. His racecraft, tyre management, and composure are at a level most drivers never reach. We are watching the beginning of something very special.</p>' +
+        '<h3>My Verdict</h3>' +
+        '<p>From a pure numbers perspective — sector times, ERS deployment patterns, brake balance adjustments across stints — Kimi\'s data traces from this race were near-perfect. This was not luck. It was mastery. March 23, 2026. Remember it.</p>'
+    },
+    '3': {
+      title: "2026 REGS — A DATA ANALYST'S TAKE",
+      meta: 'Technical Analysis &nbsp;&middot;&nbsp; March 2026 &nbsp;&middot;&nbsp; 6 min read',
+      content: '<p>Every few years, Formula 1 hits the reset button. 2022 was one such moment. 2026 is another — and arguably bigger. As someone who obsesses over both data and racing, this regulation cycle is genuinely thrilling to analyze.</p>' +
+        '<h3>What Changed</h3>' +
+        '<p>The headline changes: a 50/50 split between ICE and ERS power output, new aerodynamic philosophy with simpler front wings, active rear aero, revised floor concept, and new tyres. Basically everything changed at once.</p>' +
+        '<h3>The Power Unit Revolution</h3>' +
+        '<p>The 50/50 ICE/ERS split is the most significant engine regulation change in decades. Teams are now managing <strong>energy deployment as a strategic weapon across entire race distances</strong>. Every lap, the software balances harvesting and deployment based on circuit topology, race position, tyre temperature, weather, and rival behaviour. It is a rolling optimization problem with 50+ variables updating in real-time.</p>' +
+        '<div class="highlight">"In 2026, the race engineer\'s laptop is as important as the car\'s front wing. Maybe more."</div>' +
+        '<h3>Aerodynamic Reset</h3>' +
+        '<p>Simpler front wings reduce aero sensitivity — the problem that made overtaking so difficult post-2017. Active rear aero means teams must model aerodynamic behaviour dynamically. CFD workloads have reportedly increased by 30-40% at most top teams. The floor changes are where I find things most interesting — the margin for mechanical error is razor-thin.</p>' +
+        '<h3>What the Early Data Says</h3>' +
+        '<p>Looking at pre-season testing times relative to 2025 race pace baselines, the field has compressed by approximately 0.8–1.1 seconds per lap. This convergence historically produces more competitive racing, more strategic variance, and more different winners.</p>' +
+        '<h3>My Predictions</h3>' +
+        '<p>Expect at least 4 different race winners before the summer break. The championship fight will go deep into Q4. At least one team currently written off will surprise everyone by mid-season — that is what regulation resets do. They redistribute competence. As a data analyst, watching F1 navigate these changes is a masterclass in systems engineering and real-time decision-making.</p>'
+    }
+  };
+
+  /* ── GOOGLE SHEETS ── */
+  var SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxTUI3bidvttxlF5YSyLEo12M_GeSwm_mqgRPTLPck1lYkzfJ_FBiCSXcxftoBF5gQQ9w/exec';
+
+  /* ════════════════════════════════════
+     WIRE EVERYTHING ON DOM READY
+  ════════════════════════════════════ */
+  document.addEventListener('DOMContentLoaded', function() {
+
+    /* Hero CTAs */
+    var bp = document.getElementById('btn-view-projects');
+    var bc = document.getElementById('btn-get-in-touch');
+    if (bp) bp.addEventListener('click', function(e){ e.preventDefault(); smoothTo('projects'); });
+    if (bc) bc.addEventListener('click',  function(e){ e.preventDefault(); smoothTo('contact'); });
+
+    /* Hackathon cert buttons */
+    var bh = document.getElementById('btn-open-hack');
+    var bi = document.getElementById('btn-open-iit');
+    if (bh) bh.addEventListener('click', function(){ openModal('hackModal'); });
+    if (bi) bi.addEventListener('click', function(){ openModal('iitModal'); });
+
+    /* Modal close buttons — each has a unique id */
+    ['hackModal','iitModal','blogModal'].forEach(function(id) {
+      var btn = document.getElementById('close-' + id);
+      if (btn) btn.addEventListener('click', function(){ closeModal(id); });
+    });
+
+    /* Close on backdrop click */
+    document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) overlay.classList.remove('open');
+      });
+    });
+
+    /* Blog cards — each has a unique id */
+    [1, 2, 3].forEach(function(n) {
+      var card = document.getElementById('blog-card-' + n);
+      if (!card) return;
+      card.addEventListener('click', function() {
+        var b = blogs[String(n)];
+        if (!b) return;
+        document.getElementById('blogModalTitle').textContent = b.title;
+        document.getElementById('blogModalContent').innerHTML =
+          '<div style="font-size:0.75rem;color:var(--grey);letter-spacing:1px;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid var(--border);">' + b.meta + '</div>' +
+          b.content;
+        openModal('blogModal');
+      });
+    });
+
+    /* Contact form */
+    var submitBtn = document.getElementById('cf_submit');
+    if (submitBtn) submitBtn.addEventListener('click', submitForm);
+
+    var resetBtn = document.getElementById('btn-reset-form');
+    if (resetBtn) resetBtn.addEventListener('click', function() {
+      ['cf_name','cf_email','cf_message','cf_linkedin'].forEach(function(id){ document.getElementById(id).value=''; });
+      document.getElementById('cf_profession').selectedIndex = 0;
+      document.getElementById('cf_error').style.display = 'none';
+      document.getElementById('cf_btn_text').textContent = '🏁 Send Message';
+      submitBtn.disabled = false;
+      document.getElementById('contactFormWrap').style.display = 'block';
+      document.getElementById('cf_success').style.display = 'none';
+    });
+
+    /* Nav highlight on scroll */
+    var navLinks = document.querySelectorAll('.nav-links a');
+    var sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', function() {
+      var current = '';
+      sections.forEach(function(s){ if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+      navLinks.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+    }, { passive: true });
+
+  }); /* end DOMContentLoaded */
+
+  /* ── FORM SUBMIT ── */
+  function submitForm() {
+    var name     = document.getElementById('cf_name').value.trim();
+    var email    = document.getElementById('cf_email').value.trim();
+    var role     = document.getElementById('cf_profession').value;
+    var linkedin = document.getElementById('cf_linkedin').value.trim();
+    var message  = document.getElementById('cf_message').value.trim();
+    var errEl    = document.getElementById('cf_error');
+    var btnText  = document.getElementById('cf_btn_text');
+    var btn      = document.getElementById('cf_submit');
+
+    if (!name || !email || !role || !message) {
+      errEl.textContent = '⚠ Please fill all required fields!';
+      errEl.style.display = 'block'; return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errEl.textContent = '⚠ Please enter a valid email address.';
+      errEl.style.display = 'block'; return;
+    }
+    errEl.style.display = 'none';
+    btnText.textContent = '⏳ Sending...';
+    btn.disabled = true;
+
+    fetch(SHEETS_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: name, email: email, role: role, linkedin: linkedin, message: message })
+    }).then(function() {
+      document.getElementById('contactFormWrap').style.display = 'none';
+      document.getElementById('cf_success').style.display = 'block';
+    }).catch(function() {
+      errEl.textContent = '⚠ Something went wrong. Please email me at geethakokilam13@gmail.com';
+      errEl.style.display = 'block';
+      btnText.textContent = '🏁 Send Message';
+      btn.disabled = false;
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
